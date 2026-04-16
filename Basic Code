@@ -1,5 +1,5 @@
 mqtt:
-  enabled: false
+  host: 192.168.10.37
 
 detectors:
   cpu1:
@@ -9,17 +9,10 @@ objects:
   track:
     - person
     - car
-    - motorcycle
-    - bicycle
-    - bus
     - truck
-    - dog
-    - cat
-    - backpack
-    - handbag
-    - suitcase
+    - motorcycle
     - chair
-    - tv    # monitor ke liye (COCO me "tv" use hota hai)
+    - tv
 
 snapshots:
   enabled: true
@@ -27,6 +20,17 @@ snapshots:
   bounding_box: true
   retain:
     default: 7
+
+record:
+  enabled: true
+  alerts:
+    retain:
+      days: 7
+      mode: motion
+  detections:
+    retain:
+      days: 7
+      mode: motion
 
 cameras:
   trueview:
@@ -36,17 +40,10 @@ cameras:
           roles:
             - detect
             - record
-
     detect:
       width: 640
       height: 480
-      fps: 5
-
+      fps: 10
     motion:
       threshold: 25
       contour_area: 30
-
-    record:
-      enabled: true
-
-version: 0.17-0
