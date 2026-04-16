@@ -9,6 +9,17 @@ objects:
   track:
     - person
     - car
+    - motorcycle
+    - bicycle
+    - bus
+    - truck
+    - dog
+    - cat
+    - backpack
+    - handbag
+    - suitcase
+    - chair
+    - tv    # monitor ke liye (COCO me "tv" use hota hai)
 
 snapshots:
   enabled: true
