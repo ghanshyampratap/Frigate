@@ -1,0 +1,41 @@
+mqtt:
+  enabled: false
+
+detectors:
+  cpu1:
+    type: cpu
+
+objects:
+  track:
+    - person
+    - car
+
+snapshots:
+  enabled: true
+  timestamp: true
+  bounding_box: true
+  retain:
+    default: 7
+
+cameras:
+  trueview:
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:@192.168.10.221:554/ch0_0.264
+          roles:
+            - detect
+            - record
+
+    detect:
+      width: 640
+      height: 480
+      fps: 5
+
+    motion:
+      threshold: 25
+      contour_area: 30
+
+    record:
+      enabled: true
+
+version: 0.17-0
