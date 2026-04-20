@@ -36,7 +36,7 @@ cameras:
   trueview:
     ffmpeg:
       inputs:
-        - path: rtsp://admin:@192.168.10.221:554/ch0_0.264
+        - path: rtsp://admin:@192.168.10.97:554/ch0_0.264
           roles:
             - detect
             - record
