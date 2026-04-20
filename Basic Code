@@ -1,8 +1,18 @@
 mqtt:
+  enabled: true
   host: 192.168.10.37
+  port: 1883
+  topic_prefix: frigate
+  client_id: frigate
 
 detectors:
   cpu1:
+    type: cpu
+  cpu2:
+    type: cpu
+  cpu3:
+    type: cpu
+  cpu4:
     type: cpu
 
 objects:
@@ -13,7 +23,9 @@ objects:
     - motorcycle
     - chair
     - tv
-
+    - bottle
+    - laptop
+    - mouse
 snapshots:
   enabled: true
   timestamp: true
@@ -40,10 +52,58 @@ cameras:
           roles:
             - detect
             - record
+      global_args:
+        - -rtsp_transport
+        - tcp
     detect:
+      enabled: true
       width: 640
       height: 480
       fps: 10
     motion:
       threshold: 25
       contour_area: 30
+    record:
+      enabled: true
+prama_dome:
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:Prama12!@192.168.10.4:554/Streaming/Channels/101
+          roles:
+            - detect
+            - record
+      global_args:
+        - -rtsp_transport
+        - tcp
+    detect:
+      enabled: true
+      width: 640
+      height: 480
+      fps: 10
+    motion:
+      threshold: 25
+      contour_area: 30
+    record:
+      enabled: true
+
+  prama_bullet:
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:Prama12!@192.168.10.64:554/Streaming/Channels/101
+          roles:
+            - detect
+            - record
+      global_args:
+        - -rtsp_transport
+        - tcp
+    detect:
+      enabled: true
+      width: 640
+      height: 480
+      fps: 10
+    motion:
+      threshold: 25
+      contour_area: 30
+    record:
+      enabled: true
+version: 0.17-0
