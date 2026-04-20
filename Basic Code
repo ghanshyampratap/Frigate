@@ -26,6 +26,7 @@ objects:
     - bottle
     - laptop
     - mouse
+
 snapshots:
   enabled: true
   timestamp: true
@@ -48,7 +49,7 @@ cameras:
   trueview:
     ffmpeg:
       inputs:
-        - path: rtsp://admin:@192.168.10.97:554/ch0_0.264
+        - path: rtsp://admin:@192.168.10.98:554/ch0_0.264
           roles:
             - detect
             - record
@@ -65,7 +66,8 @@ cameras:
       contour_area: 30
     record:
       enabled: true
-prama_dome:
+
+  prama_dome:
     ffmpeg:
       inputs:
         - path: rtsp://admin:Prama12!@192.168.10.4:554/Streaming/Channels/101
@@ -106,4 +108,3 @@ prama_dome:
       contour_area: 30
     record:
       enabled: true
-version: 0.17-0
