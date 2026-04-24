@@ -21,11 +21,23 @@ objects:
     - car
     - truck
     - motorcycle
+    - bicycle
+    - bus
+    - train
+    - traffic light
+    - stop sign
+    - parking meter
     - chair
     - tv
     - bottle
     - laptop
     - mouse
+    - backpack
+    - handbag
+    - suitcase
+    - umbrella
+    - dog
+    - cat
 
 snapshots:
   enabled: true
@@ -48,9 +60,9 @@ record:
 go2rtc:
   streams:
     prama_dome:
-      - "rtsp://admin:Prama12%2521@192.168.10.4:554/Streaming/Channels/101"
+      - rtsp://admin:Prama12%2521@192.168.10.4:554/Streaming/Channels/101
     prama_bullet:
-      - "rtsp://admin:Prama12!@192.168.10.64:554/Streaming/Channels/101"
+      - rtsp://admin:Prama12!@192.168.10.64:554/Streaming/Channels/101
 
 cameras:
   trueview:
@@ -115,3 +127,5 @@ cameras:
       contour_area: 30
     record:
       enabled: true
+
+version: 0.17-0
