@@ -45,6 +45,13 @@ record:
       days: 7
       mode: motion
 
+go2rtc:
+  streams:
+    prama_dome:
+      - "rtsp://admin:Prama12%2521@192.168.10.4:554/Streaming/Channels/101"
+    prama_bullet:
+      - "rtsp://admin:Prama12!@192.168.10.64:554/Streaming/Channels/101"
+
 cameras:
   trueview:
     ffmpeg:
@@ -70,18 +77,18 @@ cameras:
   prama_dome:
     ffmpeg:
       inputs:
-        - path: rtsp://admin:Prama12!@192.168.10.4:554/Streaming/Channels/101
+        - path: rtsp://localhost:8554/prama_dome
           roles:
-            - detect
             - record
+            - detect
       global_args:
         - -rtsp_transport
         - tcp
     detect:
       enabled: true
-      width: 640
-      height: 480
-      fps: 10
+      width: 1280
+      height: 720
+      fps: 5
     motion:
       threshold: 25
       contour_area: 30
@@ -91,18 +98,18 @@ cameras:
   prama_bullet:
     ffmpeg:
       inputs:
-        - path: rtsp://admin:Prama12!@192.168.10.64:554/Streaming/Channels/101
+        - path: rtsp://localhost:8554/prama_bullet
           roles:
-            - detect
             - record
+            - detect
       global_args:
         - -rtsp_transport
         - tcp
     detect:
       enabled: true
-      width: 640
-      height: 480
-      fps: 10
+      width: 1280
+      height: 720
+      fps: 5
     motion:
       threshold: 25
       contour_area: 30
