@@ -1,131 +1,330 @@
 mqtt:
+
   enabled: true
+
   host: 192.168.10.37
+
   port: 1883
+
   topic_prefix: frigate
+
   client_id: frigate
 
 detectors:
-  cpu1:
-    type: cpu
-  cpu2:
-    type: cpu
-  cpu3:
-    type: cpu
-  cpu4:
-    type: cpu
+
+  hailo:
+
+    type: hailo8l
+
+    device: PCIe
+
+ffmpeg:
+
+  global_args:
+
+   - -hide_banner
+
+   - -loglevel
+
+   - warning
+
+semantic_search:
+
+  enabled: false
+
+face_recognition:
+
+  enabled: true
+
+  model_size: small
+
+lpr:
+
+  enabled: false
 
 objects:
+
   track:
+
     - person
+
     - car
+
     - truck
+
     - motorcycle
-    - bicycle
+
+    #- bicycle
+
     - bus
-    - train
-    - traffic light
-    - stop sign
-    - parking meter
+
+    #- train
+
+    #- traffic light
+
+    #- stop sign
+
+    #- parking meter
+
     - chair
-    - tv
+
+    #- tv
+
     - bottle
+
     - laptop
-    - mouse
-    - backpack
-    - handbag
-    - suitcase
-    - umbrella
-    - dog
-    - cat
+
+    #- mouse
+
+    #- backpack
+
+    #- handbag
+
+    #- suitcase
+
+   #- umbrella
+
+    #- dog
+
+    #- cat
+
+
 
 snapshots:
+
   enabled: true
+
   timestamp: true
+
   bounding_box: true
+
   retain:
-    default: 7
+
+    default: 4
 
 record:
+
   enabled: true
+
   alerts:
+
     retain:
-      days: 7
+
+      days: 2
+
       mode: motion
+
   detections:
+
     retain:
-      days: 7
+
+      days: 4
+
       mode: motion
 
 go2rtc:
+
   streams:
+
     prama_dome:
+
       - rtsp://admin:Prama12%2521@192.168.10.4:554/Streaming/Channels/101
+
+    prama_dome_sub:
+
+      - rtsp://admin:Prama12%2521@192.168.10.4:554/Streaming/Channels/102
+
     prama_bullet:
+
       - rtsp://admin:Prama12!@192.168.10.64:554/Streaming/Channels/101
 
+    prama_bullet_sub:
+
+      - rtsp://admin:Prama12!@192.168.10.64:554/Streaming/Channels/102
+
+    aqara_doorbell:
+
+      - rtsp://155:293@192.168.10.20:8554/ch3
+
+
+
 cameras:
+
   trueview:
+
     ffmpeg:
+
       inputs:
-        - path: rtsp://admin:@192.168.10.98:554/ch0_0.264
+
+        - path: rtsp://admin:@192.168.10.221:554/ch0_0.264
+
           roles:
+
             - detect
+
             - record
+
       global_args:
+
         - -rtsp_transport
+
         - tcp
+
     detect:
+
       enabled: true
+
       width: 640
+
       height: 480
-      fps: 10
+
+      fps: 2
+
     motion:
+
       threshold: 25
+
       contour_area: 30
+
     record:
+
       enabled: true
 
   prama_dome:
+
     ffmpeg:
+
       inputs:
+
         - path: rtsp://localhost:8554/prama_dome
+
           roles:
+
             - record
+
+        - path: rtsp://localhost:8554/prama_dome_sub
+
+          roles:
+
             - detect
+
       global_args:
+
         - -rtsp_transport
+
         - tcp
+
     detect:
-      enabled: true
-      width: 1280
-      height: 720
-      fps: 5
-    motion:
-      threshold: 25
-      contour_area: 30
-    record:
+
       enabled: true
 
-  prama_bullet:
-    ffmpeg:
-      inputs:
-        - path: rtsp://localhost:8554/prama_bullet
-          roles:
-            - record
-            - detect
-      global_args:
-        - -rtsp_transport
-        - tcp
-    detect:
-      enabled: true
-      width: 1280
-      height: 720
+      width: 640
+
+      height: 480
+
       fps: 5
+
     motion:
+
       threshold: 25
+
       contour_area: 30
+
     record:
+
       enabled: true
+
+
+
+prama_bullet:
+
+    ffmpeg:
+
+      inputs:
+
+        - path: rtsp://localhost:8554/prama_bullet
+
+          roles:
+
+            - record
+
+        - path: rtsp://localhost:8554/prama_bullet_sub
+
+          roles:
+
+            - detect
+
+      global_args:
+
+        - -rtsp_transport
+
+        - tcp
+
+    detect:
+
+      enabled: true
+
+      width: 640
+
+      height: 480
+
+      fps: 5
+
+    motion:
+
+      threshold: 25
+
+      contour_area: 30
+
+    record:
+
+      enabled: true
+
+  aqara_doorbell:
+
+    ffmpeg:
+
+      inputs:
+
+        - path: rtsp://localhost:8554/aqara_doorbell
+
+          roles:
+
+            - detect
+
+            - record
+
+      global_args:
+
+        - -rtsp_transport
+
+        - tcp
+
+    detect:
+
+      enabled: true
+
+      width: 640
+
+      height: 480
+
+      fps: 5
+
+    motion:
+
+      threshold: 25
+
+      contour_area: 30
+
+    record:
+
+      enabled: true
+
+
+
+environment_vars:
+
+  FRIGATE_CACHE_SIZE: 512mb
 
 version: 0.17-0
+
